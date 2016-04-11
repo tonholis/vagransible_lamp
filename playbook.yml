@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    #Apache config
+    document_root: /vagrant
+
+    #Database config
+    db_name: dbtest
+    db_user: dbtest
+    db_password: dbtest
+  handlers:
+    - name: reload apache
+      service: name=apache2 state=reloaded
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+  roles:
+    - webserver
+    - database
+    - wkhtmltopdf

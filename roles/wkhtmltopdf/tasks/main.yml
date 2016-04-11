@@ -1,0 +1,17 @@
+---
+- name: Download WKHTMLtoPDF
+  become: yes
+  become_method: sudo
+  get_url: 
+    url=http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+    dest=/var/wkhtmltox.tar.xz
+    validate_certs=no 
+  
+- name: Extract WKHTMLtoPDF  
+  unarchive: 
+    src=/var/wkhtmltox.tar.xz
+    dest=/var
+    copy=no 
+  
+- name: Create Symbolic link
+  file: src=/var/wkhtmltox/bin/wkhtmltopdf dest=/usr/local/bin/wkhtmltopdf state=link
