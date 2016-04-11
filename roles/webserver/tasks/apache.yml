@@ -21,3 +21,8 @@
     state=link
   notify:
     - reload apache
+
+- name: PHP Info
+  template: 
+    src=index.php.j2 
+    dest=/vagrant/index.php
